@@ -25,7 +25,7 @@ ARCH=i386
 endif
 NOARCH=noarch
 
-MOUNT_DIR=/grog/Projects/WinQuake
+MOUNT_DIR=.
 MASTER_DIR=/grog/Projects/QuakeMaster
 MESA_DIR=/usr/local/src/Mesa-2.6
 TDFXGL_DIR = /home/zoid/3dfxgl
@@ -33,8 +33,7 @@ TDFXGL_DIR = /home/zoid/3dfxgl
 BUILD_DEBUG_DIR=debug$(ARCH)$(GLIBC)
 BUILD_RELEASE_DIR=release$(ARCH)$(GLIBC)
 
-EGCS=/usr/local/egcs-1.1.2/bin/gcc
-CC=$(EGCS)
+CC=gcc
 
 BASE_CFLAGS=-Dstricmp=strcasecmp
 RELEASE_CFLAGS=$(BASE_CFLAGS) -g -mpentiumpro -O6 -ffast-math -funroll-loops \
@@ -64,11 +63,13 @@ DO_GL_AS=$(CC) $(CFLAGS) $(GLCFLAGS) -DELF -x assembler-with-cpp -o $@ -c $<
 # SETUP AND BUILD
 #############################################################################
 
-TARGETS=$(BUILDDIR)/bin/squake \
+TARGETS= \
+	$(BUILDDIR)/bin/quake.x11
+
+UNBUILT_TARGETS=$(BUILDDIR)/bin/squake \
 	$(BUILDDIR)/bin/glquake \
 	$(BUILDDIR)/bin/glquake.glx \
 	$(BUILDDIR)/bin/glquake.3dfxgl \
-	$(BUILDDIR)/bin/quake.x11
 	# $(BUILDDIR)/bin/unixded
 
 build_debug:
